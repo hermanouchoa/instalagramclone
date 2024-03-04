@@ -12,3 +12,7 @@ var port = 3000;
 app.listen(port);
 
 console.log('Jesus me ajude nesse jornada. API escutando na '+port);
+
+app.get('/', function (req, res) {
+   res.send({msg: "Olá"}) ;
+});
