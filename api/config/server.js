@@ -13,7 +13,7 @@ api.use(expressValidator());
 
 consign()
     .include('routes')
-    .then('config/dbConnection.js')
+    .then('config/dbConnectionMySql.js')
     .then('config/dbConnectionOracle.js')
     .then('models')
     .then('controllers')
