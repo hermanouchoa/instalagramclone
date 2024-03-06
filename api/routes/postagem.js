@@ -1,5 +1,5 @@
 module.exports = function (api) {
-    api.post('/store', function (req, res) {
+    api.post('/postagem/store', function (req, res) {
         api.controllers.postagem.store(api, req, res);
     });
 
