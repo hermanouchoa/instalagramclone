@@ -1,7 +1,7 @@
-module.exports.store = function (api, req, res) {    
+module.exports.store = async function (api, req, res) {    
     var postagem = req.body;
 
-    res.json(postagem);
+    //res.json(postagem);
 
     req.assert('titulo', 'Título deve ser informado').notEmpty();
     req.assert('titulo', 'Título deve ter entre 3 e 100 caracteres').len(3,100);
@@ -15,12 +15,19 @@ module.exports.store = function (api, req, res) {
         return;
     } 
 
-    var connection = api.config.dbConnectionMySql();
+    var connection = await api.config.dbConnectionMySql();
                         
-    var postagemModel = api.models.mysql.PostagemDAO(connection);
+    var postagemModel = new api.models.mysql.PostagemDAO(connection);
+    
 
     postagemModel.salvarPostagem(postagem, function (error, result) {
-        res.json({msg: "Registro inserido com sucesso", registro: result});
+        if (error) {
+            res.json({erro: error});    
+        } else {
+            res.json({msg: "Registro inserido com sucesso_"});
+        }
+        
+        //res.json({msg: "Registro inserido com sucesso_", registro: result});
     });
 }
 
